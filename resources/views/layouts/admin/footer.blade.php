@@ -16,6 +16,10 @@
 <script src="/admin/dist/js/pages/dashboard3.js"></script>
 
 <script src="/admin/plugins/ckeditor/ckeditor.js"></script>
+<script src="/admin/dist/js/sweetalert2.js"></script>
+
+@yield('script')
+
 <script>
     ClassicEditor
         .create( document.querySelector( '#editor' ) )
