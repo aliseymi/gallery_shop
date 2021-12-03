@@ -85,7 +85,7 @@
                                                 <td>{{ $product->price }} تومان</td>
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-default btn-icons"><i
+                                                    <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-default btn-icons"><i
                                                             class="fa fa-edit"></i></a>
 
                                                     <form action="{{ route('admin.products.delete', $product->id) }}" class="d-inline" method="post">

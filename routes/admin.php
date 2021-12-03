@@ -31,6 +31,10 @@ Route::prefix('products')->group(function(){
     Route::post('', [ProductsController::class, 'store'])->name('admin.products.store');
 
     Route::delete('{product_id}/delete', [ProductsController::class, 'delete'])->name('admin.products.delete');
+    
+    Route::get('{product_id}/edit', [ProductsController::class, 'edit'])->name('admin.product.edit');
+
+    Route::put('{product_id}/update',[ProductsController::class, 'update'])->name('admin.products.update');
 
     Route::get('{product_id}/download/demo', [ProductsController::class, 'downloadDemo'])->name('admin.products.download.demo');
     Route::get('{product_id}/download/source', [ProductsController::class, 'downloadSource'])->name('admin.products.download.source');

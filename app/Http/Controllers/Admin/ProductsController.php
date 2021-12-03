@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Utilities\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Products\StoreRequest;
+use App\Http\Requests\Admin\Products\UpdateRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\File;
@@ -44,6 +45,58 @@ class ProductsController extends Controller
         ]);
 
 
+        $this->uploadImages($validatedData, $product);
+    }
+
+    public function downloadDemo($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        return response()->download(public_path($product->demo_url));
+    }
+
+    public function downloadSource($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        return response()->download(storage_path('app/local_storage/' . $product->source_url));
+    }
+
+    public function edit($product_id)
+    {
+        $categories = Category::all();
+        $product = Product::findOrFail($product_id);
+
+        return view('admin.products.edit', compact('product', 'categories'));
+    }
+
+    public function update(UpdateRequest $request, $product_id)
+    {
+        $validatedData = $request->validated();
+        
+        $product = Product::findOrFail($product_id);
+        
+        $updatedProduct = $product->update([
+            'title' => $validatedData['title'],
+            'category_id' => $validatedData['category_id'],
+            'price' => $validatedData['price'],
+            'description' => $validatedData['description'],
+        ]);
+
+        // TODO: check image uploaded?
+    }
+
+    public function delete($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        $product->delete();
+
+        return back()->with('success', 'محصول حذف شد');
+    }
+
+    private function uploadImages($validatedData, $product)
+    {
         try {
             $basePath = 'images/products/' . $product->id;
 
@@ -71,28 +124,5 @@ class ProductsController extends Controller
         } catch (Exception $e) {
             return back()->with('failed', $e->getMessage());
         }
-    }
-
-    public function downloadDemo($product_id)
-    {
-        $product = Product::findOrFail($product_id);
-
-        return response()->download(public_path($product->demo_url));
-    }
-
-    public function downloadSource($product_id)
-    {
-        $product = Product::findOrFail($product_id);
-
-        return response()->download(storage_path('app/local_storage/' . $product->source_url));
-    }
-
-    public function delete($product_id)
-    {
-        $product = Product::findOrFail($product_id);
-
-        $product->delete();
-
-        return back()->with('success', 'محصول حذف شد');
     }
 }
