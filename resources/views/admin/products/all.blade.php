@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td>{{ $product->category->title }}</td>
                                                 <td>{{ $product->owner->name }}</td>
-                                                <td>{!! $product->description !!}</td>
+                                                <td>{!! Str::limit($product->description, 15) !!}</td>
                                                 <td>
                                                     <a href="{{ route('admin.products.download.demo', $product->id) }}"
                                                         class="btn btn-default btn-icons" title="لینک دمو"><i
