@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Models\User;
 
@@ -51,3 +52,8 @@ Route::prefix('users')->group(function(){
     Route::delete('{user_id}/delete', [UsersController::class, 'delete'])->name('admin.users.delete');
 });
 
+Route::prefix('orders')->group(function(){
+
+    Route::get('', [OrdersController::class, 'all'])->name('admin.orders.all');
+
+});
