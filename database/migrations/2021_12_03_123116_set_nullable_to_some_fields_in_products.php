@@ -28,9 +28,9 @@ class SetNullableToSomeFieldsInProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('thumbnail_url')->change()->nullable(false);
-            $table->string('demo_url')->change()->nullable(false);
-            $table->string('source_url')->change()->nullable(false);
+            $table->string('thumbnail_url')->nullable(false)->change();
+            $table->string('demo_url')->nullable(false)->change();
+            $table->string('source_url')->nullable(false)->change();
         });
     }
 }

@@ -23,6 +23,9 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+
+        @include('errors.message')
+
           <div class="row">
               <div class="col-12">
                   <div class="card">
