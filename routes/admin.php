@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Models\User;
 
@@ -53,7 +54,9 @@ Route::prefix('users')->group(function(){
 });
 
 Route::prefix('orders')->group(function(){
-
     Route::get('', [OrdersController::class, 'all'])->name('admin.orders.all');
+});
 
+Route::prefix('payments')->group(function(){
+    Route::get('' ,[PaymentsController::class, 'all'])->name('admin.payments.all');
 });
