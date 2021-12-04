@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Models\User;
 
+Route::get('/index',function(){
+    return view('admin.index');
+});
+
 Route::prefix('categories')->group(function () {
 
     # admin/categories
