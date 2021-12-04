@@ -152,7 +152,7 @@ class ProductsController extends Controller
             if(isset($validatedData['thumbnail_url'])){
                 $fullPath = $basePath . '/thumbnail_url_' . $validatedData['thumbnail_url']->getClientOriginalName();
 
-                ImageUploader::upload($validatedData['thumbnail_url'], $sourceImageFullPath, 'public_storage');
+                ImageUploader::upload($validatedData['thumbnail_url'], $fullPath, 'public_storage');
 
                 $data += ['thumbnail_url' => $fullPath];
             }
@@ -160,7 +160,7 @@ class ProductsController extends Controller
             if(isset($validatedData['demo_url'])){
                 $fullPath = $basePath . '/demo_url_' . $validatedData['demo_url']->getClientOriginalName();
 
-                ImageUploader::upload($validatedData['demo_url'], $sourceImageFullPath, 'public_storage');
+                ImageUploader::upload($validatedData['demo_url'], $fullPath, 'public_storage');
 
                 $data += ['demo_url' => $fullPath];
             }
