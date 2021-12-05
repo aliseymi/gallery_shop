@@ -34,11 +34,13 @@
             <!-- Search product -->
             <div class="dis-none panel-search w-full p-t-10 p-b-15">
                 <div class="bor8 dis-flex p-l-15">
+                 <form class="flex-w p-l-15" action="{{ route('home.products.all') }}">
                     <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                         <i class="zmdi zmdi-search"></i>
                     </button>
 
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="متن خود را اینجا بنویسید و enter بزنید ...">
+                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search" placeholder="متن خود را اینجا بنویسید ...">
+                 </form>
                 </div>	
             </div>
 
@@ -73,25 +75,25 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="/" class="filter-link stext-106 trans-04 @if(!request('range') || request()->fullUrl() == env('APP_URL')) filter-link-active @endif">
                                     همه
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=price&action=findByPriceRange&range=10to100000" class="filter-link stext-106 trans-04 {{ request('range') == '10to100000' ? 'filter-link-active' : '' }}">
                                     ۱۰ الی ۱۰۰ هزار تومان
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=price&action=findByPriceRange&range=101000to200000" class="filter-link stext-106 trans-04 {{ request('range') == '101000to200000' ? 'filter-link-active' : '' }}">
                                     ۱۰۱ الی ۲۰۰ هزار تومان
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=price&action=findByPriceRange&range=201000to300000" class="filter-link stext-106 trans-04 {{ request('range') == '201000to300000' ? 'filter-link-active' : '' }}">
                                     ۲۰۱ الی ۳۰۰ هزار تومان
                                 </a>
                             </li>
@@ -105,31 +107,31 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=default" class="filter-link stext-106 trans-04 @if(request()->fullUrl() == env('APP_URL') || request('action') == 'default') filter-link-active @endif">
                                     پیش فرض
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=mostPopular" class="filter-link stext-106 trans-04 {{ request('action') == 'mostPopular' ? 'filter-link-active' : '' }}">
                                     محبوبیت
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="?filter=orderby&action=newest" class="filter-link stext-106 trans-04 {{ request('action') == 'newest' ? 'filter-link-active' : '' }}">
                                     جدیدترین
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=lowToHigh" class="filter-link stext-106 trans-04 {{ request('action') == 'lowToHigh' ? 'filter-link-active' : '' }}">
                                     قیمت:‌ کم به زیاد
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=highToLow" class="filter-link stext-106 trans-04 {{ request('action') == 'highToLow' ? 'filter-link-active' : '' }}">
                                     قیمت:‌زیاد به کم
                                 </a>
                             </li>
