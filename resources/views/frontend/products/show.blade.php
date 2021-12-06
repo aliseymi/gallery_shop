@@ -1,5 +1,15 @@
 @extends('layouts.frontend.master')
 
+@section('style')
+    <style>
+        .hov-img0 img {
+            height: 334px;
+            object-fit: cover;
+        }
+
+    </style>
+@endsection
+
 @section('content')
 
     <!-- breadcrumb -->
@@ -79,7 +89,7 @@
                         </h4>
 
                         <span class="mtext-106 cl2">
-							 {{ number_format($product->price) }} هزار تومان
+							 {{ number_format($product->price) }} تومان
 						</span>
 
                         <p class="stext-102 cl3 p-t-23">
@@ -91,9 +101,9 @@
 
                             <div class="flex-w flex-r-m p-b-10">
                                 <div class="flex-w flex-m respon6-next">
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                    <a href="{{ route('home.cart.add', $product->id) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                         افزودن به سبد خرید
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +205,7 @@
                                     </a>
 
                                     <span class="stext-105 cl3">
-									{{ number_format($similarProduct->price) }} هزار تومان
+									{{ number_format($similarProduct->price) }} تومان
 								</span>
                                 </div>
                             </div>

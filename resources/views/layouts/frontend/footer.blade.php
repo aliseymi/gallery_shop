@@ -8,30 +8,24 @@
                     دسته بندی ها
                 </h4>
 
+                @php
+                    $categories = App\Models\Category::all();
+                @endphp
+
                 <ul>
-                    <li class="p-b-10">
-                        <a href="#" class="mtext-106 cl7 hov-cl1 trans-04">
-                            کارت ویزیت
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="mtext-106 cl7 hov-cl1 trans-04">
-                            تراکت
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="mtext-106 cl7 hov-cl1 trans-04">
-                            بنر
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="mtext-106 cl7 hov-cl1 trans-04">
-                            وکتور
-                        </a>
-                    </li>
+                    @if ($categories)
+                        @foreach ($categories as $category)
+                        <li class="p-b-10">
+                            <a href="#" class="mtext-106 cl7 hov-cl1 trans-04">
+                                {{ $category->title }} 
+                            </a>
+                        </li>
+                        @endforeach
+                    @else
+                        <li class="p-b-10">
+                            هیچ دسته بندی ثبت نشده است
+                        </li>
+                    @endif
                 </ul>
             </div>
 
@@ -73,7 +67,7 @@
                 </h4>
 
                 <p class="mtext-106 cl7" style="line-height: 40px">
-                    بدلیل شرایط حساس کنونی و شیوع کرونا تیم سون لرن تا اطلاع ثانوی به صورت دورکار فعالیت دارد.
+                بدلیل شرایط حساس کنونی و شیوع کرونا تا اطلاع ثانوی به صورت دورکار فعالیت داریم.
                 </p>
 
                 <div class="p-t-27">
@@ -203,6 +197,7 @@
         })
     });
 </script>
+
 <!--===============================================================================================-->
 <script src="/js/main.js"></script>
 
