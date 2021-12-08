@@ -17,4 +17,10 @@ Route::get('{product_id}/removeFromCart', [CartController::class, 'removeFromCar
 
 Route::get('checkout', [CheckoutController::class, 'show'])->name('home.checkout.show');
 
-Route::get('pay', [PaymentController::class, 'pay']);
+Route::prefix('payment')->group(function(){
+
+    Route::post('pay', [PaymentController::class, 'pay'])->name('payment.pay');
+
+    Route::post('callback', [PaymentController::class, 'callback'])->name('payment.callback');
+
+});

@@ -20,9 +20,11 @@
 <div class="alert alert-danger alert-dismissible fade show">
     <h4 class="alert-heading">توجه!</h4>
     
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    @if (isset($closable) && $closable == 'closable')
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    @endif
 
     <ul>
         @foreach ($errors->all() as $error)
