@@ -19,8 +19,9 @@ class CreatePaymentsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->enum('gateway',['idpay','zarinpal']);
             $table->enum('status',['unpaid','paid']);
-            $table->unsignedInteger('res_id');
-            $table->unsignedInteger('ref_id');
+            $table->unsignedInteger('res_id')->nullable();
+            // $table->unsignedInteger('ref_id');
+            $table->char('ref_code', 128)->nullable();
             $table->timestamps();
         });
     }
