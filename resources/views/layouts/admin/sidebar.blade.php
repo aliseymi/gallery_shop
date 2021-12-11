@@ -12,8 +12,8 @@
                             <img src="/images/icons/logo-01.png" style="filter: brightness(0) invert(1);">
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item has-treeview {{ isActive(['admin.products.create', 'admin.products.all', 'admin.categories.all'], 'menu-open') }}">
+                        <a href="#" class="nav-link {{ isActive(['admin.products.create', 'admin.products.all', 'admin.categories.all']) }}">
                             <i class="nav-icon fa fa-image"></i>
                             <p>
                                 مدیریت محصولات
@@ -22,27 +22,27 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.create') }}" class="nav-link">
+                                <a href="{{ route('admin.products.create') }}" class="nav-link {{ isActive('admin.products.create') }}">
                                     <i class="fa fa-plus nav-icon"></i>
                                     <p>افزودن محصول</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.all') }}" class="nav-link">
+                                <a href="{{ route('admin.products.all') }}" class="nav-link {{ isActive('admin.products.all') }}">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست محصولات</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.categories.all') }}" class="nav-link">
+                                <a href="{{ route('admin.categories.all') }}" class="nav-link {{ isActive('admin.categories.all') }}">
                                     <i class="nav-icon fa fa-sitemap"></i>
                                     <p>دسته بندی ها</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item has-treeview {{ isActive(['admin.users.create', 'admin.users.all'], 'menu-open') }}">
+                        <a href="#" class="nav-link {{ isActive(['admin.users.create', 'admin.users.all']) }}">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                                 مدیریت کاربران
@@ -51,7 +51,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.users.create') }}" class="nav-link">
+                                <a href="{{ route('admin.users.create') }}" class="nav-link {{ isActive('admin.users.create') }}">
                                     <i class="fa fa-plus nav-icon"></i>
                                     <p>افزودن</p>
                                 </a>
@@ -59,7 +59,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.users.all') }}" class="nav-link">
+                                <a href="{{ route('admin.users.all') }}" class="nav-link {{ isActive('admin.users.all') }}">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست</p>
                                 </a>
@@ -67,13 +67,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.orders.all') }}" class="nav-link">
+                        <a href="{{ route('admin.orders.all') }}" class="nav-link {{ isActive('admin.orders.all') }}">
                             <i class="nav-icon fa fa-shopping-cart"></i>
                             <p class="text">سفارشات</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.payments.all') }}" class="nav-link">
+                        <a href="{{ route('admin.payments.all') }}" class="nav-link {{ isActive('admin.payments.all') }}">
                             <i class="nav-icon fa fa-dollar"></i>
                             <p class="text">پرداخت ها</p>
                         </a>
