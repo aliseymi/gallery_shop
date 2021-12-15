@@ -1,5 +1,14 @@
 @extends('layouts.admin.master')
 
+@section('style')
+    <style>
+        .product_img{
+            width: 30px;
+            object-fit: cover;
+        }
+    </style>
+@endsection
+
 @section('content')
 
   <!-- Content Wrapper. Contains page content -->
@@ -64,7 +73,7 @@
                                 </td>
                                 <td>{{ $order->created_at }}</td>
                                 <td>
-                                    <button class="btn btn-default btn-icons" data-toggle="modal" data-target="#order_items" title="مشاهده سبد خرید"><i class="fa fa-shopping-cart"></i></button>
+                                    <button class="btn btn-default btn-icons seeCartDetails" data-id="{{ $order->id }}" data-toggle="modal" data-target="#order_items" title="مشاهده سبد خرید"><i class="fa fa-shopping-cart"></i></button>
                                 </td>
                             </tr>
                               @endforeach
@@ -103,76 +112,66 @@
                 <div class="modal-body p-0">
                     <div class="table table-striped table-valign-middle mb-0">
                         <table class="table table-hover mb-0">
-                            <tbody>
-                            <tr>
-                                <th>عنوان</th>
-                                <th>دسته بندی</th>
-                                <th>لینک دمو</th>
-                                <th>لینک دانلود</th>
-                                <th>قیمت</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/user6-128x128.jpg" class="product_img">
-                                    کارت ویزیت مشاور املاک</td>
-                                <td>کارت ویزیت</td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دمو"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دانلود"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>۳۹۰۰۰ تومان</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/user6-128x128.jpg" class="product_img">
-                                    کارت ویزیت مشاور املاک</td>
-                                <td>کارت ویزیت</td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دمو"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دانلود"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>۳۹۰۰۰ تومان</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/user6-128x128.jpg" class="product_img">
-                                    کارت ویزیت مشاور املاک</td>
-                                <td>کارت ویزیت</td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دمو"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دانلود"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>۳۹۰۰۰ تومان</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/user6-128x128.jpg" class="product_img">
-                                    کارت ویزیت مشاور املاک</td>
-                                <td>کارت ویزیت</td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دمو"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default btn-icons" title="لینک دانلود"><i class="fa fa-link"></i></a>
-                                </td>
-                                <td>۳۹۰۰۰ تومان</td>
-                            </tr>
-                            </tbody></table>
+                            <thead>
+                                <tr>
+                                    <th>عنوان</th>
+                                    <th>دسته بندی</th>
+                                    <th>لینک دمو</th>
+                                    <th>لینک دانلود</th>
+                                    <th>قیمت</th>
+                                </tr>
+                            </thead>
+
+                            {{-- tbody fill by ajax --}}
+                            <tbody id="orderTable"></tbody>
+
+                        </table>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                    <span>قیمت کل: <strong id="totalPrice"></strong></span>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+@endsection
+
+
+@section('script')
+
+    <script>
+
+        $('.modal').on('hidden.bs.modal', function(){
+            $('#orderTable').empty();
+            $('#totalPrice').empty();
+        });
+        
+        $('.seeCartDetails').on('click', function(){
+            let id = $(this).data('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN' : document.head.querySelector('[name="csrf-token"]').content,
+                }
+            });
+
+            $.ajax({
+                url: 'orders/details',
+                type: 'POST',
+                data: {
+                    id: id 
+                },
+                success: function(res){
+                    $('#orderTable').append(res['orderItemRows'])
+                    $('#totalPrice').append(res['totalPrice'])
+                }
+            });
+        });
+
+    </script>
 
 @endsection

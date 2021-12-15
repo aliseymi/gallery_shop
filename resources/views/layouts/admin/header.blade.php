@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>پنل مدیریت</title>
 
@@ -20,6 +21,8 @@
     <link rel="stylesheet" href="/admin/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="/admin/dist/css/custom-style.css">
+
+    @yield('style')
 
 </head>
 

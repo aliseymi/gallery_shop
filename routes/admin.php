@@ -59,6 +59,8 @@ Route::prefix('users')->group(function(){
 
 Route::prefix('orders')->group(function(){
     Route::get('', [OrdersController::class, 'all'])->name('admin.orders.all');
+
+    Route::post('details', [OrdersController::class, 'showDetails']);
 });
 
 Route::prefix('payments')->group(function(){
