@@ -207,7 +207,7 @@
 
 
     <!-- Modal1 -->
-    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="quickSeeModal">
         <div class="overlay-modal1 js-hide-modal1"></div>
 
         <div class="container">
@@ -220,22 +220,23 @@
                     <div class="col-md-6 col-lg-7 p-b-30">
                         <div class="p-l-25 p-r-30 p-lr-0-lg">
                             <div class="wrap-slick3 flex-sb flex-w">
-                                <div class="wrap-slick3-dots"></div>
+                                {{-- <div class="wrap-slick3-dots"></div> --}}
                                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                                <div class="slick3 gallery-lb" id="quickSeeModal_image">
-                                    <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                                <div class="slick3 gallery-lb">
+                                    <div class="item-slick3" data-thumb="">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                            <img src="" alt="IMG-PRODUCT"
+                                                id="quickSeeMainImage" style="width: 513px; height: 460px; object-fit: cover;">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                href="images/product-detail-01.jpg">
+                                                id="expandImage" href="">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+                                    {{-- <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
                                         <div class="wrap-pic-w pos-relative">
                                             <img src="/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -255,7 +256,7 @@
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -263,17 +264,17 @@
 
                     <div class="col-md-6 col-lg-5 p-b-30">
                         <div class="p-l-50 p-t-5 p-lr-0-lg">
-                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                                کارت ویزیت مشاور املاک
+                            <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="quickSee_title">
+                                {{-- کارت ویزیت مشاور املاک --}}
                             </h4>
 
-                            <span class="mtext-106 cl2">
-                                ۱۳ هزار تومان
+                            <span class="mtext-106 cl2" id="quickSee_price">
+                                {{-- ۱۳ هزار تومان --}}
                             </span>
 
-                            <p class="stext-102 cl3 p-t-23">
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                                چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+                            <p class="stext-102 cl3 p-t-23" id="quickSee_desc">
+                                {{-- لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
+                                چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است --}}
                             </p>
 
                             <!--  -->
@@ -281,10 +282,10 @@
 
                                 <div class="flex-w flex-r-m p-b-10">
                                     <div class="flex-w flex-m respon6-next">
-                                        <button
+                                        <a href="" id="addToCart"
                                             class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                             افزودن به سبد خرید
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -300,9 +301,33 @@
 @section('script')
 
     <script>
-        $('.quickSee').click(function(){
+        $('.quickSee').click(function() {
 
+            let id = $(this).data('id');
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': document.head.querySelector('[name="csrf-token"]').content
+                }
+            });
+
+            $.ajax({
+                url: '/quickSee',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+
+                    $('#quickSee_title').html(res['title'])
+                    $('#quickSee_price').html(res['price'])
+                    $('#quickSee_desc').html(res['description'])
+                    $('#addToCart').attr('href', res['href'])
+                    $('#expandImage').attr('href', res['demo_url'])
+                    $('#quickSeeMainImage').attr('src', res['demo_url'])
+
+                }
+            });
 
         });
     </script>

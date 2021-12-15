@@ -175,7 +175,13 @@
     $('.js-addcart-detail').each(function(){
         var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
+            // swal(nameProduct, "به سبد خرید اضافه شد", "success");
+            swal({
+                icon: 'success',
+                title: nameProduct,
+                text: 'به سبد خرید اضافه شد',
+                buttons: 'بسیارخب'
+            });
         });
     });
 

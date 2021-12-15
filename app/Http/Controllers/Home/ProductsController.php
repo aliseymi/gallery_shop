@@ -16,4 +16,19 @@ class ProductsController extends Controller
 
         return view('frontend.products.show', compact('product', 'similarProducts'));
     }
+
+    public function quickSee(Request $request)
+    {
+        $id = $request->id;
+
+        $product = Product::find($id);
+
+        $product->price = number_format($product->price) . ' تومان';
+
+        $product->description = strip_tags($product->description);
+
+        $product->href = route('home.cart.add', $product->id);
+
+        return $product;
+    }
 }

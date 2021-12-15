@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', [HomeController::class, 'all'])->name('home.products.all');
 
+// route for ajax
+Route::post('quickSee', [ProductsController::class, 'quickSee']);
+
 Route::get('{product_id}/show', [ProductsController::class, 'show'])->name('home.products.show');
 
 Route::get('{product_id}/addToCart', [CartController::class, 'addToCart'])->name('home.cart.add');
