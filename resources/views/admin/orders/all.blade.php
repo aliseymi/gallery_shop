@@ -144,11 +144,6 @@
 @section('script')
 
     <script>
-
-        $('.modal').on('hidden.bs.modal', function(){
-            $('#orderTable').empty();
-            $('#totalPrice').empty();
-        });
         
         $('.seeCartDetails').on('click', function(){
             let id = $(this).data('id');
@@ -166,8 +161,8 @@
                     id: id 
                 },
                 success: function(res){
-                    $('#orderTable').append(res['orderItemRows'])
-                    $('#totalPrice').append(res['totalPrice'])
+                    $('#orderTable').html(res['orderItemRows'])
+                    $('#totalPrice').html(res['totalPrice'])
                 }
             });
         });

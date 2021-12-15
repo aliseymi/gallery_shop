@@ -173,8 +173,8 @@
                             <div class="block2-pic hov-img0">
                                 <img src="/{{ $product->demo_url }}" alt="IMG-PRODUCT">
 
-                                <a href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                <a href="#" data-id="{{ $product->id }}"
+                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 quickSee">
                                     مشاهده سریع
                                 </a>
                             </div>
@@ -223,7 +223,7 @@
                                 <div class="wrap-slick3-dots"></div>
                                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                                <div class="slick3 gallery-lb">
+                                <div class="slick3 gallery-lb" id="quickSeeModal_image">
                                     <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
                                         <div class="wrap-pic-w pos-relative">
                                             <img src="/images/product-detail-01.jpg" alt="IMG-PRODUCT">
@@ -295,4 +295,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script>
+        $('.quickSee').click(function(){
+
+
+
+        });
+    </script>
+
 @endsection
