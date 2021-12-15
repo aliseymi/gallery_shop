@@ -35,12 +35,12 @@ class OrdersController extends Controller
                     <img src="/'.$product->thumbnail_url.'" class="product_img">
                     '.$product->category->title.'</td>
                 <td>'.$product->title.'</td>
-                <td>
+                <!--<td>
                     <a href="#" class="btn btn-default btn-icons" title="لینک دمو"><i class="fa fa-link"></i></a>
                 </td>
                 <td>
                     <a href="#" class="btn btn-default btn-icons" title="لینک دانلود"><i class="fa fa-link"></i></a>
-                </td>
+                </td>-->
                 <td>'.number_format($product->price).' تومان</td>
             </tr>';
         }
