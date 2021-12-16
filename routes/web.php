@@ -11,6 +11,7 @@ Route::get('', [HomeController::class, 'all'])->name('home.products.all');
 
 // route for ajax
 Route::post('quickSee', [ProductsController::class, 'quickSee']);
+//end
 
 Route::get('{product_id}/show', [ProductsController::class, 'show'])->name('home.products.show');
 
